@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { DateSelectionModal } from '@/components/DateSelectionModal';
@@ -17,10 +17,14 @@ export default function PlanScreen() {
   };
 
   return (
-    <ThemedView style={styles.container}>
-      <Calendar />
+    <ScrollView>
+      <ThemedView style={styles.container}>
+      <Calendar/>
       <DateSelectionModal onSave={handleDateRangeSave} ></DateSelectionModal>
-    </ThemedView>
+      </ThemedView>
+    </ScrollView>
+    
+    
     
   );
 }
@@ -31,5 +35,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
+    paddingTop: 50,
   },
 });

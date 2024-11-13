@@ -42,7 +42,7 @@ export default function DashboardPage() {
       </View>
 
       {/* Menu Options */}
-      <View style={styles.menuOptions}>
+      <View style={styles.menuOptions}>      
         <Collapsible title="Graphs & Reports">
           {/* Content for Graphs & Reports */}
           <ThemedText>View your health graphs and reports here.</ThemedText>
@@ -126,8 +126,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   menuItem: {
-    paddingVertical: 15,
+    backgroundColor: '#f5f5f5', // Light gray background
+    paddingVertical: 20,        // Increased padding for a bigger bar
+    paddingHorizontal: 16,      // Horizontal padding for space inside the item
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
+    borderRadius: 8,            // Optional: rounded corners for a smoother look
+    marginVertical: 5,       
   },
 });

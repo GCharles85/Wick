@@ -28,11 +28,22 @@ export default function HomeScreen() {
           <Ionicons name="heart-outline" size={24} color="#ff5a5f" />
         </View>
         <View style={[styles.insightCard, styles.reportCard]}>
-          <ThemedText type="defaultSemiBold">Your Period Report</ThemedText>
+          <ThemedText type="defaultSemiBold" style={styles.cardText}>Your Period Report</ThemedText>
         </View>
         <View style={[styles.insightCard, styles.cycleDayCard]}>
-          <ThemedText type="title">6</ThemedText>
-          <ThemedText type="default">Today's cycle day</ThemedText>
+          <ThemedText type="title" style={styles.cardText}>6</ThemedText>
+          <ThemedText type="default" style={styles.cardSubtitle}>Today's cycle day</ThemedText>
+        </View>
+
+        <View style={styles.insightCard}>
+          <Ionicons name="heart-outline" size={24} color="#ff5a5f" />
+        </View>
+        <View style={[styles.insightCard, styles.reportCard]}>
+          <ThemedText type="defaultSemiBold" style={styles.cardText}>Your Period Report</ThemedText>
+        </View>
+        <View style={[styles.insightCard, styles.cycleDayCard]}>
+          <ThemedText type="title" style={styles.cardText}>6</ThemedText>
+          <ThemedText type="default" style={styles.cardSubtitle}>Today's cycle day</ThemedText>
         </View>
       </ScrollView>
     </View>
@@ -119,5 +130,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#EEE4F4',
     paddingVertical: 10,
     alignItems: 'center',
+  }, 
+  cardText: {
+    color: '#333', // Increase contrast for better readability
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  cardSubtitle: {
+    color: '#555',
+    fontSize: 12,
+    textAlign: 'center',
   },
 });

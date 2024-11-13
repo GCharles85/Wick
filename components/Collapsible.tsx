@@ -33,9 +33,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
+    backgroundColor: '#f5f5f5', // Light gray background for the collapsible header
+    paddingVertical: 20,        // Increased padding for a larger header
+    paddingHorizontal: 16,      // Horizontal padding for the header
+    borderRadius: 8,            // Rounded corners for the header
+    marginVertical: 5,          // Adds spacing between collapsible items
   },
   content: {
+    padding: 16,                // Increased padding for the content area
+    backgroundColor: '#fafafa', // Slightly lighter background for the content
+    borderBottomLeftRadius: 8,  // Matching rounded corners on the content
+    borderBottomRightRadius: 8,
     marginTop: 6,
-    marginLeft: 24,
   },
 });
+
