@@ -17,7 +17,7 @@ export default function DashboardPage() {
       <View style={styles.profileCard}>
         <Image source={require('@/assets/images/react-logo.png')} style={styles.profileImage} />
         <ThemedText type="title">No account</ThemedText>
-        <TouchableOpacity>s
+        <TouchableOpacity>
           <ThemedText type="link" style={styles.editInfo}>Edit info</ThemedText>
         </TouchableOpacity>
         <TouchableOpacity style={styles.upgradeButton}>
@@ -43,19 +43,20 @@ export default function DashboardPage() {
 
       {/* Menu Options */}
       <View style={styles.menuOptions}>
-        <TouchableOpacity style={styles.menuItem}>
-          <ThemedText type="defaultSemiBold">Graphs & Reports</ThemedText>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
-          <ThemedText type="defaultSemiBold">Cycle and Ovulation</ThemedText>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
-          <ThemedText type="defaultSemiBold">Settings</ThemedText>
-        </TouchableOpacity>
+        <Collapsible title="Graphs & Reports">
+          {/* Content for Graphs & Reports */}
+          <ThemedText>View your health graphs and reports here.</ThemedText>
+        </Collapsible>
+        <Collapsible title="Cycle and Ovulation">
+          {/* Content for Cycle and Ovulation */}
+          <ThemedText>Manage your cycle and ovulation settings.</ThemedText>
+        </Collapsible>
+        <Collapsible title="Settings">
+          {/* Content for Settings */}
+          <ThemedText>Adjust your app preferences and settings.</ThemedText>
+        </Collapsible>
       </View>
 
-      {/* Date Selection Modal Example (optional) */}
-      <DateSelectionModal onSave={(range) => console.log('Date range saved:', range)} />
     </View>
   );
 }
