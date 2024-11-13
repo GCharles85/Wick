@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { DateSelectionModal } from '@/components/DateSelectionModal';
 import { Calendar } from 'react-native-calendars';
 import React from 'react';
 import { Image } from 'react-native';
@@ -8,18 +9,17 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { Text } from 'react-native'; 
 
 
+
 export default function PlanScreen() {
+  const handleDateRangeSave = (range) => {
+    console.log('Date range saved:', range);
+    // Save the range to your data structure here
+  };
+
   return (
     <ThemedView style={styles.container}>
-      <ThemedText type="title">This is a title</ThemedText>
-      <ThemedText type="subtitle">This is a subtitle</ThemedText>
-      <ThemedText type="defaultSemiBold" lightColor="#333" darkColor="#CCC">
-        This is default semi-bold text with custom colors for light and dark themes
-      </ThemedText>
-      <ThemedText type="link" onPress={() => console.log('Link clicked')}>
-        This is a link
-      </ThemedText>
-      <Calendar/>
+      <Calendar />
+      <DateSelectionModal onSave={handleDateRangeSave} ></DateSelectionModal>
     </ThemedView>
     
   );
