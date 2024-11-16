@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Platform, ScrollView, TouchableOpacity, View } from 'react-native';
-
+import RSSFeed from '@/components/RSSFeed'
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -9,7 +9,9 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function HomeScreen() {
   return (
+    
     <View style={styles.container}>
+    <RSSFeed/>
     {/* Ovulation Status Circle */}
     <View style={styles.ovulationStatus}>
       <ThemedText type="defaultSemiBold" style={styles.ovulationText}>Ovulation in</ThemedText>
@@ -46,6 +48,7 @@ export default function HomeScreen() {
           <ThemedText type="default" style={styles.cardSubtitle}>Today's cycle day</ThemedText>
         </View>
       </ScrollView>
+  
     </View>
   </View>
   );
