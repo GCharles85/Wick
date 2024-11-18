@@ -10,10 +10,14 @@ const RSSFeed = () => {
   useEffect(() => {
     const fetchRSSFeed = async () => {
       try {
-        const rssFeedUrl = 'https://rss.nytimes.com/services/xml/rss/nyt/Health.xml';
-
-        // Fetch RSS Feed
-        const response = await axios.get(rssFeedUrl);
+       const rssFeedUrl = 'https://crispy-capybara-vpr46wxq66qfw6gj-4000.app.github.dev/fetch-rss'; 
+       // Fetch the RSS feed XML from the Node.js backend
+       const response = await axios.get(rssFeedUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      });
 
         // Parse the XML response
         const parser = new XMLParser();
