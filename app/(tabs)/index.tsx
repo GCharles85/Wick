@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function HomeScreen() {
   return (
-    
+    //Replace Scrollview in my daily insights section with rssfeed component
     <View style={styles.container}>
     <RSSFeed/>
     {/* Ovulation Status Circle */}
