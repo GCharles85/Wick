@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, StyleSheet, ActivityIndicator, Image } from 'react-native';
+import { ScrollView, Text, View, StyleSheet, ActivityIndicator, Image } from 'react-native';
 import axios from 'axios';
 import { XMLParser } from 'fast-xml-parser';
 import * as FileSystem from 'expo-file-system'; // Use for saving files locally in a React Native environment
+import { Ionicons } from '@expo/vector-icons';
 
 const RSSFeed = () => {
   const [loading, setLoading] = useState(true);
@@ -11,6 +12,7 @@ const RSSFeed = () => {
   useEffect(() => {
     const fetchRSSFeed = async () => {
       try {
+
         /*
         const rssFeedUrl = 'https://organic-space-zebra-6v569wj49wj25vr6-4000.app.github.dev/fetch-rss';
 
@@ -29,6 +31,7 @@ const RSSFeed = () => {
         // Extract the first 10 articles from the feed
         const items = jsonData.rss.channel.item.slice(0, 10);
         */
+       
         const mockFeedItems = [
           { title: "A futuristic city with flying cars under a sunset sky", link: "https://example.com/article1" },
           { title: "A cozy cabin in a snowy forest at night", link: "https://example.com/article2" },
@@ -38,12 +41,10 @@ const RSSFeed = () => {
         ];
         const items = mockFeedItems;
         
-        // Fetch images for each item title
         const itemsWithImages = await Promise.all(
           items.map(async (item) => {
             const imageUrl = await fetchImageForPrompt(item.title);
-            const localImageUri = await saveImageLocally(imageUrl, item.title);
-            return { ...item, image: localImageUri };
+            return { ...item, image: imageUrl };
           })
         );
 
@@ -58,27 +59,10 @@ const RSSFeed = () => {
     fetchRSSFeed();
   }, []);
 
-  // Function to fetch an image based on a prompt
   const fetchImageForPrompt = async (prompt) => {
     const formattedPrompt = prompt.replace(/\s+/g, '-');
     const apiUrl = `https://image.pollinations.ai/prompt/${formattedPrompt}`;
-    return apiUrl; // Return the image URL directly since Pollinations serves the image
-  };
-
-  // Function to save the image locally
-  const saveImageLocally = async (imageUrl, title) => {
-    try {
-      // Fetch the image as a blob
-      const response = await fetch(imageUrl);
-      const blob = await response.blob();
-  
-      // Create a URL for the image blob
-      const localUri = URL.createObjectURL(blob);
-      return localUri; // Return the blob URL
-    } catch (error) {
-      console.error('Error saving image locally:', error);
-      return null;
-    }
+    return apiUrl;
   };
 
   if (loading) {
@@ -89,46 +73,49 @@ const RSSFeed = () => {
       </View>
     );
   }
-//TODO 1: Replace below with horizontal scrollview
+
   return (
-    <FlatList
-      data={feedItems}
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item }) => (
-        <View style={styles.feedItem}>
-          <Text style={styles.title}>{item.title}</Text>
-          {item.image && (
-            <Image source={{ uri: item.image }} style={styles.image} />
+    <ScrollView horizontal contentContainerStyle={styles.horizontalScrollView}>
+      {feedItems.map((item, index) => (
+        <View key={index} style={styles.feedItem}>
+          {item.image ? (
+            <Image source={{ uri: item.image }} style={styles.iconImage} />
+          ) : (
+            <Ionicons name="image-outline" size={30} color="#ccc" />
           )}
+          <Text style={styles.iconText}>{item.title}</Text>
         </View>
-      )}
-    />
+      ))}
+    </ScrollView>
   );
 };
 
 export default RSSFeed;
 
-//TODO 2: Add CSS for images to blur them and get them to icon size
 const styles = StyleSheet.create({
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  feedItem: {
+  horizontalScrollView: {
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
   },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
+  feedItem: {
+    alignItems: 'center',
+    marginHorizontal: 10,
+  },
+  iconImage: {
+    width: 50, // Icon size
+    height: 50, // Icon size
+    borderRadius: 25,
+    resizeMode: 'cover',
     marginBottom: 8,
   },
-  image: {
-    width: '100%',
-    height: 200,
-    resizeMode: 'cover',
-    marginTop: 8,
+  iconText: {
+    fontSize: 12,
+    textAlign: 'center',
   },
 });
