@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import { Calendar } from 'react-native-calendars';
+import { DateRangeManager } from './DateRangeManager'; // Import the statistical component
 
 export function DateSelectionModal({ onSave }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [markedDates, setMarkedDates] = useState({});
+  const [daysUntil, setDaysUntil] = useState(null); // State for storing the calculated days until the next range
 
   // Toggle modal visibility
   const toggleModal = () => {
@@ -54,7 +56,13 @@ export function DateSelectionModal({ onSave }) {
 
   const handleSave = () => {
     if (startDate && endDate) {
-      onSave({ start: startDate, end: endDate });
+      const range = { start: startDate, end: endDate };
+      console.log("Range" + [range]);
+      const dateRangeManager = new DateRangeManager([range]); // Create an instance with the selected range
+      const nextDaysUntil = dateRangeManager.calculateDaysUntilNextRange(); // Calculate days until the next range
+
+      setDaysUntil(nextDaysUntil); // Store the result in state
+      onSave({ ...range, daysUntil: nextDaysUntil }); // Pass the range and calculation to the parent
       toggleModal();
     } else {
       alert('Please select a start and end date.');
@@ -65,6 +73,13 @@ export function DateSelectionModal({ onSave }) {
     <View style={styles.container}>
       {/* Button to open the modal */}
       <Button title="Select Date Range" onPress={toggleModal} />
+
+      {/* Display the calculated days until */}
+      {daysUntil !== null && (
+        <Text style={styles.resultText}>
+          Days until the next range: {daysUntil}
+        </Text>
+      )}
 
       {/* Modal for date selection */}
       <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
@@ -136,5 +151,10 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: 'white',
     fontWeight: 'bold',
+  },
+  resultText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: 'black',
   },
 });
