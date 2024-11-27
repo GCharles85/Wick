@@ -14,6 +14,7 @@ export function DateSelectionModal({ onSave }) {
   const [endDate, setEndDate] = useState(null);
   const [markedDates, setMarkedDates] = useState({});
   const [daysUntil, setDaysUntil] = useState(null); // State for storing the calculated days until the next range
+  const dateRangeManager = new DateRangeManager(); 
 
   // Toggle modal visibility
   const toggleModal = () => {
@@ -62,8 +63,7 @@ export function DateSelectionModal({ onSave }) {
     if (startDate && endDate) {
       const range = { start: startDate, end: endDate };
       //const dateRangeManager = new DateRangeManager([range]); // Create an instance with the selected range
-      const dateRangeManager = new DateRangeManager([range]); 
-      const nextDaysUntil = dateRangeManager.calculateDaysUntilNextRange(); // Calculate days until the next range
+      const nextDaysUntil = dateRangeManager.calculateDaysUntilNextRange(range); // Calculate days until the next range
       setDaysUntil(nextDaysUntil); // Store the result in state
       onSave({ ...range, daysUntil: nextDaysUntil }); // Pass the range and calculation to the parent
       toggleModal();
