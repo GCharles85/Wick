@@ -1,19 +1,45 @@
 export class DateRangeManager {
-    constructor(dateRanges = []) {
-        this.dateRanges = dateRanges.map(range => ({
-            start: new Date(range.start),
-            end: new Date(range.end)
-        }));
+    /*
+    Doing init of dateRanges array in the ctor again
+    */
+    constructor(range = []) { // Accept an array of ranges
+        this.dateRanges = range.map(item => ({
+            start: new Date(item.start),
+            end: new Date(item.end)
+        })); // Populate the array using the input
+        console.log(JSON.stringify(this.dateRanges, null, 2)); // Log the result
         this.daysUntil = null; // To store the calculated days until the next range
     }
+    
 
     calculateDaysUntilNextRange() {
         const currentDate = new Date();
+        console.log("range length " + this.dateRanges.length);
+        for (let step = 0; step < this.dateRanges.length; step++) {
+            // Runs 5 times, with values of step 0 through 4.
+            console.log(`date range ${step} ` + JSON.stringify(this.dateRanges[step], null, 2));
+          }
+         
+        
+        const filteredRanges = this.dateRanges
+          .filter(range => range.start < currentDate);
+          for (let step = 0; step < filteredRanges.length; step++) {
+            // Runs 5 times, with values of step 0 through 4.
+            console.log(`filtered date range ${step} ` + JSON.stringify(filteredRanges[step], null, 2));
+          }
+
+          const nextRanges = filteredRanges.sort((a, b) => a.start - b.start);
+          for (let step = 0; step < nextRanges.length; step++) {
+            // Runs 5 times, with values of step 0 through 4.
+            console.log(`next range ${step} ` + JSON.stringify(nextRanges[step], null, 2));
+          }
+
 
         // Find the next date range that starts after today
-        const nextRange = this.dateRanges
-            .filter(range => range.start > currentDate) // Filter out past or ongoing ranges
-            .sort((a, b) => a.start - b.start)[0]; // Sort and take the earliest
+         const nextRange = nextRanges[0];
+         console.log(`next range ${nextRange}`);
+        //     .filter(range => range.start > currentDate) // Filter out past or ongoing ranges
+        //     .sort((a, b) => a.start - b.start)[0]; // Sort and take the earliest
 
         if (!nextRange) {
             this.daysUntil = null; // No upcoming ranges
@@ -21,7 +47,7 @@ export class DateRangeManager {
         }
 
         // Calculate the difference in days
-        const timeDiff = nextRange.start - currentDate; // Difference in milliseconds
+        const timeDiff = currentDate - nextRange.start ; // Difference in milliseconds
         this.daysUntil = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // Convert to days
 
         return this.daysUntil;
@@ -38,22 +64,3 @@ export class DateRangeManager {
     }
 }
 
-// Example usage
-const dateRanges = [
-    { start: "2024-12-01", end: "2024-12-10" },
-    { start: "2025-01-15", end: "2025-01-20" },
-    { start: "2024-11-30", end: "2024-12-05" }
-];
-
-const manager = new DateRangeManager(dateRanges);
-
-// Calculate days until the next range
-console.log(manager.calculateDaysUntilNextRange()); // Outputs the number of days until the next range
-console.log(manager.daysUntil); // Access the stored `daysUntil` value
-
-// Add a new date range
-manager.addDateRange("2024-11-28", "2024-11-29");
-
-// Recalculate with the new range
-console.log(manager.calculateDaysUntilNextRange()); // Updates with the new closest range
-console.log(manager.daysUntil); // Access the updated `daysUntil` value

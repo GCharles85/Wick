@@ -4,6 +4,10 @@ import Modal from 'react-native-modal';
 import { Calendar } from 'react-native-calendars';
 import { DateRangeManager } from './DateRangeManager'; // Import the statistical component
 
+/*Actions so far:
+  - uncommented Daterangemanager ctor
+  - passing date range directly to calculateDaysUntilNextRange
+ */
 export function DateSelectionModal({ onSave }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [startDate, setStartDate] = useState(null);
@@ -57,10 +61,9 @@ export function DateSelectionModal({ onSave }) {
   const handleSave = () => {
     if (startDate && endDate) {
       const range = { start: startDate, end: endDate };
-      console.log("Range" + [range]);
-      const dateRangeManager = new DateRangeManager([range]); // Create an instance with the selected range
+      //const dateRangeManager = new DateRangeManager([range]); // Create an instance with the selected range
+      const dateRangeManager = new DateRangeManager([range]); 
       const nextDaysUntil = dateRangeManager.calculateDaysUntilNextRange(); // Calculate days until the next range
-
       setDaysUntil(nextDaysUntil); // Store the result in state
       onSave({ ...range, daysUntil: nextDaysUntil }); // Pass the range and calculation to the parent
       toggleModal();
