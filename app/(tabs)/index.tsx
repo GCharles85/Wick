@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform, ScrollView, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Platform, ScrollView, TouchableOpacity, View, Button } from 'react-native';
 import RSSFeed from '@/components/RSSFeed'
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -7,7 +7,8 @@ import { ThemedView } from '@/components/ThemedView';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function HomeScreen() {
+
+const HomeScreen =  ({navigation}) => {
   return (
     //Replace Scrollview in my daily insights section with rssfeed component
     <View style={styles.container}>
@@ -18,7 +19,7 @@ export default function HomeScreen() {
       <ThemedText type="default" style={styles.daysText}>6 days</ThemedText>
       <ThemedText type="default" style={styles.chanceText}>Low chance of getting pregnant</ThemedText>
       <TouchableOpacity style={styles.logButton}>
-        <ThemedText type="default" style={styles.logButtonText}>Log period</ThemedText>
+       <ThemedText type="default" style={styles.logButtonText}>Log period</ThemedText>
       </TouchableOpacity>
     </View>
 
@@ -53,6 +54,8 @@ export default function HomeScreen() {
   </View>
   );
 }
+
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
