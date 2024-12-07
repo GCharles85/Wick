@@ -23,6 +23,9 @@ export default function HomeScreen({ navigation }) {
        <ThemedText type="default" style={styles.logButtonText}>Log period</ThemedText>
       </TouchableOpacity>
     </View>
+    <TouchableOpacity style={styles.planButton} onPress={() => navigation.navigate("plan")}>
+          <ThemedText type="default" style={styles.planButton}>Plan</ThemedText>
+    </TouchableOpacity>
 
     {/* My Daily Insights Section */}
     <View style={styles.insightsSection}>
@@ -98,6 +101,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 20,
     marginTop: 10,
+  },
+  planButton: {
+    backgroundColor: '#ff5a5f',
+    paddingVertical: 3,
+    paddingHorizontal: 18,
+    borderRadius: 20,
+    marginTop: 1,
+    alignSelf: 'flex-start'
   },
   logButtonText: {
     color: 'white',

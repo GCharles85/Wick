@@ -9,6 +9,7 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import HomeScreen from './index';
 import Explore from './explore';
+import Plan from './plan';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,13 @@ export default function TabLayout()  {
          component={Explore}
          options={{
            title: 'Explore',
+         }}
+        />  
+        <Stack.Screen
+         name="plan"
+         component={Plan}
+         options={{
+           title: 'Plan',
          }}
         />  
       </Stack.Navigator>
