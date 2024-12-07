@@ -6,9 +6,10 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from 'expo-router';
 
 
-const HomeScreen =  ({navigation}) => {
+export default function HomeScreen({ navigation }) {
   return (
     //Replace Scrollview in my daily insights section with rssfeed component
     <View style={styles.container}>
@@ -18,7 +19,7 @@ const HomeScreen =  ({navigation}) => {
       <ThemedText type="defaultSemiBold" style={styles.ovulationText}>Ovulation in</ThemedText>
       <ThemedText type="default" style={styles.daysText}>6 days</ThemedText>
       <ThemedText type="default" style={styles.chanceText}>Low chance of getting pregnant</ThemedText>
-      <TouchableOpacity style={styles.logButton}>
+      <TouchableOpacity style={styles.logButton} onPress={() => navigation.navigate("explore")}>
        <ThemedText type="default" style={styles.logButtonText}>Log period</ThemedText>
       </TouchableOpacity>
     </View>
@@ -54,8 +55,6 @@ const HomeScreen =  ({navigation}) => {
   </View>
   );
 }
-
-export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {

@@ -10,9 +10,12 @@ import { View, Image, TouchableOpacity, Button, StyleSheet } from 'react-native'
 import { ThemedText } from '@/components/ThemedText';
 import { DateSelectionModal } from '@/components/DateSelectionModal';
 
-export default function DashboardPage() {
+export default function DashboardPage({navigation}) {
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={() => (navigation.goBack())}>
+          <ThemedText type="default">Go Back</ThemedText>
+      </TouchableOpacity>
       {/* User Profile Card */}
       <View style={styles.profileCard}>
         <Image source={require('@/assets/images/react-logo.png')} style={styles.profileImage} />
@@ -95,6 +98,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 20,
     marginTop: 10,
+  },
+  backButton: {
+    backgroundColor: '#ff5a5f',
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    marginTop: 10,
+    alignSelf: 'flex-start'
   },
   upgradeButtonText: {
     color: 'white',

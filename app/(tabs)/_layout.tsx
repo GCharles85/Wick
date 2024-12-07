@@ -7,7 +7,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import HomeScreen from '.';
+import HomeScreen from './index';
+import Explore from './explore';
 
 const Stack = createStackNavigator();
 
@@ -15,17 +16,24 @@ export default function TabLayout()  {
   const colorScheme = useColorScheme();
 
   return ( //TODO Finish implementing stack navigation
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-    //     <Stack.Screen
-    //      name="index"
-    //      component={HomeScreen}
-    //      options={{
-    //        title: 'Home',
-    //      }}
-    //     />
-    //   </Stack.Navigator>
-    <Tabs
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+         name="index"
+         component={HomeScreen}
+         options={{
+           title: 'Home',
+         }}
+        />
+         <Stack.Screen
+         name="explore"
+         component={Explore}
+         options={{
+           title: 'Explore',
+         }}
+        />  
+      </Stack.Navigator>
+    {/* <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
@@ -57,8 +65,8 @@ export default function TabLayout()  {
           ),
         }}
       />
-    </Tabs> 
-    // </NavigationContainer>
+    </Tabs>  */}
+     </NavigationContainer>
    
   );
 }
